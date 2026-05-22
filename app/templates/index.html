@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>TODO App</title>
+    <style>
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body {
+            font-family: sans-serif;
+            background: {{ bg }};
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .container {
+            background: white;
+            border-radius: 12px;
+            padding: 30px;
+            width: 480px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.15);
+        }
+        h1 { text-align: center; margin-bottom: 6px; }
+        .env-badge {
+            text-align: center;
+            margin-bottom: 20px;
+            font-size: 12px;
+            background: #eee;
+            border-radius: 20px;
+            padding: 3px 12px;
+            display: inline-block;
+            width: 100%;
+        }
+        .add-form { display: flex; gap: 8px; margin-bottom: 20px; }
+        .add-form input {
+            flex: 1;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            font-size: 14px;
+        }
+        .add-form button {
+            padding: 10px 16px;
+            background: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 14px;
+        }
+        ul { list-style: none; }
+        li {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px 12px;
+            margin-bottom: 8px;
+            border-radius: 8px;
+            background: #f9f9f9;
+            border: 1px solid #eee;
+        }
+        .done { text-decoration: line-through; color: #aaa; }
+        a.task-link { text-decoration: none; color: inherit; font-size: 15px; }
+        a.del { color: white; background: #e53935; padding: 4px 10px;
+                border-radius: 6px; font-size: 12px; text-decoration: none; }
+        .empty { text-align: center; color: #aaa; padding: 20px 0; }
+    </style>
+</head>
+<body>
+<div class="container">
+    <h1>📝 TODO List</h1>
+    <span class="env-badge">env: {{ env }} · storage: {{ storage }}</span>
+
+    <form class="add-form" action="/add" method="POST">
+        <input type="text" name="task" placeholder="Add a new task..." required>
+        <button type="submit">Add</button>
+    </form>
+
+    <ul>
+        {% for todo in todos %}
+        <li>
+            <a class="task-link {{ 'done' if todo.done else '' }}"
+               href="{{ url_for('check', todo_id=todo.id) }}">
+                {{ '✅' if todo.done else '⬜' }} {{ todo.task }}
+            </a>
+            <a class="del" href="{{ url_for('delete', todo_id=todo.id) }}">Delete</a>
+        </li>
+        {% endfor %}
+        {% if not todos %}
+        <li class="empty">No tasks yet!</li>
+        {% endif %}
+    </ul>
+</div>
+</body>
+</html>
