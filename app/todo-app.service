@@ -1,0 +1,17 @@
+[Unit]
+Description=TODO Flask app
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=simple
+User=todoapp
+Group=todoapp
+WorkingDirectory=/opt/todo-app
+EnvironmentFile=-/etc/todo-app/env
+ExecStart=/opt/todo-app/venv/bin/gunicorn --bind 0.0.0.0:5000 --workers 2 "app:create_app()"
+Restart=on-failure
+RestartSec=5
+
+[Install]
+WantedBy=multi-user.target
