@@ -103,13 +103,11 @@ variable "env" {
 
 variable "db_user" {
   type        = string
-  description = "PostgreSQL login role used by the application."
   default     = "todos"
 }
 
 variable "db_name" {
   type        = string
-  description = "PostgreSQL database name."
   default     = "todos"
 }
 
@@ -135,20 +133,20 @@ variable "app_private_ip" {
 
 variable "db_port" {
   type    = string
-  default = ""
+  default = "5432"
 }
 
 variable "db_sslmode" {
   type    = string
-  default = ""
+  default = "prefer"
 }
 
 variable "app_port" {
   type    = string
-  default = ""
+  default = "5000"
 }
 
 variable "bg_color" {
   type    = string
-  default = ""
+  default = "lightblue"
 }
