@@ -16,7 +16,7 @@ else
   sudo git clone "$REPO_URL" "$REPO_ROOT"
 fi
 
-id -u todoapp &>/dev/null || sudo adduser --disabled-password --gecos "" todoapp
+sudo id -u todoapp &>/dev/null || sudo adduser --disabled-password --gecos "" todoapp
 
 sudo python3 -m venv "$VENV_DIR"
 sudo "$VENV_DIR/bin/pip" install -r "$APP_DIR/requirements.txt"
