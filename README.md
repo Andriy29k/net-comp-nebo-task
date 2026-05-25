@@ -1,4 +1,4 @@
-# Network Compute Task (NEBO / Azure)
+# Network Compute Task 
 
 Stack: Azure VNet, 3 subnets, bastion host, private app + DB VMs, NAT for the app tier, Flask TODO app + PostgreSQL.
 
