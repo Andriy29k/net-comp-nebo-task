@@ -5,13 +5,15 @@ write_files:
     permissions: "0600"
     content: |
       APP_ENV=${app_env}
-      BG_COLOR=lightblue
+      BG_COLOR=${bg_color}
+      PORT=${port}
       DB_HOST=${db_host}
-      DB_PORT=5432
+      DB_PORT=${db_port}
       DB_NAME=${db_name}
       DB_USER=${db_user}
       DB_PASSWORD=${db_password}
-      DB_SSLMODE=prefer
+      DB_SSLMODE=${db_sslmode}
 
 runcmd:
-  - systemctl restart todo-app.service
+  - systemctl enable todo-app.service
+  - systemctl start todo-app.service
